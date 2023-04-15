@@ -1,5 +1,5 @@
 {
-    "date": {
+    "highlight": {
         "id": {
             "name": "Id",
             "type": "id"
@@ -8,27 +8,56 @@
             "name": "Name",
             "type": "text"
         },
-        "date": {
-            "name": "Date",
-            "type": "date"
-        },
-        "timezone": {
-            "name": "Timezone",
+        "note": {
+            "name": "Note",
             "type": "text"
         },
-        "week": {
-            "name": "WeekLink",
+        "location": {
+            "name": "Location",
             "type": "number",
+            "subtype": "integer"
+        },
+        "highlighted_at": {
+            "name": "Highlighted at",
+            "type": "date"
+        },
+        "updated": {
+            "name": "Updated",
+            "type": "date"
+        },
+        "url": {
+            "name": "URL",
+            "type": "text",
+            "subtype": "url"
+        },
+        "colour": {
+            "name": "Color",
+            "type": "text"
+        },
+        "book": {
+            "name": "BookLink",
+            "type": "text",
             "relation": {
                 "cardinality": "many-to-one",
-                "name": "Week",
-                "targetName": "Dates",
-                "targetType": "week",
-                "targetFieldId": "number"
+                "name": "Book",
+                "targetName": "Highlights",
+                "targetType": "book",
+                "targetFieldId": "id"
+            }
+        },
+        "tag": {
+            "name": "TagLink",
+            "type": "text",
+            "relation": {
+                "cardinality": "many-to-many",
+                "name": "Tags",
+                "targetName": "Highlights",
+                "targetType": "htag",
+                "targetFieldId": "id"
             }
         }   
     },
-    "week": {
+    "book": {
         "id": {
             "name": "Id",
             "type": "id"
@@ -36,10 +65,16 @@
         "name": {
             "name": "Name",
             "type": "text"
+        }
+    },
+    "htag": {
+        "id": {
+            "name": "Id",
+            "type": "id"
         },
-        "number": {
-            "name": "Number",
-            "type": "number"
-        } 
+        "name": {
+            "name": "Name",
+            "type": "text"
+        }
     }
 }
