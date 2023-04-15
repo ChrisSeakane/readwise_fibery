@@ -18,9 +18,10 @@ const appConfig = require(`./config.app.json`);
 app.get(`/`, (req, res) => res.json(appConfig));
 
 app.post(`/validate`, wrap(async (req, res) => {  
+    const token = req.body.fields.token;
     
-    if (req.body.fields.token != null) {
-        const options = { headers: { 'Authorization': 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
+    if (token != null) {
+        const options = { headers: { 'Authorization': 'Token ' + token } };
         let response = await got('https://readwise.io/api/v2/auth/', options);    
 
         if (response.statusCode === 204) {
