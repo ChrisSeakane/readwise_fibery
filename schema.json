@@ -64,6 +64,45 @@
         "name": {
             "name": "Name",
             "type": "text"
+        },
+        "author": {
+            "name": "Author",
+            "type": "text"
+        },
+        "category": {
+            "name": "Category",
+            "type": "text"
+        },
+        "source": {
+            "name": "Source",
+            "type": "text"
+        },
+        "updated": {
+            "name": "Updated",
+            "type": "date"
+        },
+        "cover_image_url": {
+            "name": "Cover image",
+            "type": "text",
+            "subType": "url"
+        },
+        "source_url": {
+            "name": "Source URL",
+            "type": "text",
+            "subType": "url"
+        },
+        "asin": {
+            "name": "ASIN",
+            "type": "text"
+        },
+        "document_note": {
+            "name": "Note",
+            "type": "text"
+        },
+        "tags": {
+            "name": "Tags",
+            "type": "array[text]",
+            "subType": "multi-select"            
         }
     }
 }
