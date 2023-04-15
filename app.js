@@ -143,7 +143,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             name: "Book 1",
             rw_id: 26439564
         };
-        item.id = uuid(JSON.stringify(item));
+        item.id = uuid((item.rw_id).toString());
         items.push(item);
         return res.json({items});
     }
