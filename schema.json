@@ -31,7 +31,7 @@
             "subType": "url"
         },
         "color": {
-            "name": "Color",
+            "name": "Highlight color",
             "type": "text"
         },
         "book": {
