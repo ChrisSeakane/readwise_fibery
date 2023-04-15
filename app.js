@@ -35,7 +35,7 @@ app.get(`/logo`, (req, res) => res.sendFile(path.resolve(__dirname, `logo.svg`))
 const appConfig = require(`./config.app.json`);
 app.get(`/`, (req, res) => res.json(appConfig));
 
-app.post(`/validate`, (req, res) => res.json({name: `Public`}));
+app.post(`/validate`, (req, res) => res.json({name: `Access token`}));
 
 const syncConfig = require(`./config.sync.json`);
 app.post(`/api/v1/synchronizer/config`, (req, res) => res.json(syncConfig));
