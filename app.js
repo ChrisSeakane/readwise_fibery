@@ -37,7 +37,7 @@ app.get(`/`, (req, res) => res.json(appConfig));
 
 app.post(`/validate`, (req, res) => {
     const token = req.body.fields.token;
-    if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") {
+    if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
         return res.json({
             accesstoken: token,
         });
@@ -45,7 +45,6 @@ app.post(`/validate`, (req, res) => {
 
     res.status(401).json({message: `Invalid access token`});
 });
-
 
 const syncConfig = require(`./config.sync.json`);
 app.post(`/api/v1/synchronizer/config`, (req, res) => res.json(syncConfig));
@@ -59,15 +58,10 @@ function getTitle(name) {
 }
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
-
     let tzs = spacetime().timezones;
-    
-    let temp = Object.keys(tzs);
-    console.log(temp)
-    temp = temp.map(getTitle)
-    console.log(temp);
-    const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
-    
+    let tzname = Object.keys(tzs);
+    tzname = tzname.map(getTitle);
+    const items = tzname.sort((a, b) => (a.title > b.title) ? 1: -1);
     res.json({items});
 }));
 
