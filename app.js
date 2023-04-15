@@ -89,14 +89,14 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             id:uuid((h.id).toString()),
             //rw_id:h.id,
             name:h.text,
-            color:h.tags.map((t)=> t.id),
+            color:h.color,
             location:h.location,
             highlighted_at:h.highlighted_at,
             updated:h.updated,
             url:h.url,
             note:h.note,
-            location_type:h.location_type,
-            book:h.uuid(book_id.toString())//,
+            location_type:h.location_type
+            //book:h.uuid(book_id.toString())
             //tags:h.tags.map(t => t.name)
         }));
         
