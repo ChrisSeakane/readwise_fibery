@@ -48,18 +48,7 @@
         location_type: {
             name: `Location type`,
             type: `text`,
-            subType: `single-select`,
-            options: [
-                {
-                    name: `page`
-                },
-                {
-                    name: `order`
-                },
-                {
-                    name: `time_offset`
-                }
-            ]
+            subType: `single-select`
         },
         "tag": {
             "name": "TagLink",
