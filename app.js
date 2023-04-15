@@ -71,7 +71,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
     const options = { headers: { 'Authorization': 'Token ' + account.token } };
     let response = await got('https://readwise.io/api/v2/highlights/', options);
-    let jsonhighlights = await response.json();    
+    let highlights = JSON.parse(response.body);
     
     
     if (requestedType !== `date` && requestedType != `week`) {
@@ -99,7 +99,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     const item = s.json();
                     console.log(item);
                     item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = jsonhighlights.next;
+                    item.name = highlights.next;
                     item.timezone = s.timezone().name;
                     //item.timezone = timezone;
                     item.id = uuid(JSON.stringify(item));
