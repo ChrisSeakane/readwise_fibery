@@ -85,6 +85,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         } 
         
         let items = [];
+        /*
         items = highlights.map(h => ({
             id:uuid((h.id).toString()),
             name:h.text,
@@ -98,6 +99,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             book:uuid((h.book_id).toString()),
             tags:(h.tags).map((t) => t.name)
         }));
+        */
+        
+        items = highlights.map(h => ({...h, id: uuid((h.id).toString()), book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
         
         return res.json({items});
     }
