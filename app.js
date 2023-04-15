@@ -120,7 +120,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         items = books.map(b => ({
             id:uuid((b.id).toString()),
             //rw_id:b.id,
-            title:b.text,
+            name:b.title,
             author:b.author,
             category:b.category,
             source:b.source,
