@@ -74,9 +74,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         var url = 'https://readwise.io/api/v2/highlights';
         let response = await got(url, options);
         let body = JSON.parse(response.body);
-        let next = body.next;
         let highlights = body.results;
-
+        
+        let next = body.next;
         while (next !== null) {
             response = await got(next, options);
             body = JSON.parse(response.body);
@@ -87,7 +87,6 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         let items = [];
         items = highlights.map(h => ({
             id:uuid((h.id).toString()),
-            //rw_id:h.id,
             name:h.text,
             color:h.color,
             location:h.location,
@@ -97,7 +96,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             note:h.note,
             location_type:h.location_type,
             book:uuid((h.book_id).toString()),
-            tags:h.tags.map(t => t.name)
+            tags:(h.tags).map((t) => t.name)
         }));
         
         return res.json({items});
@@ -106,9 +105,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         var url = 'https://readwise.io/api/v2/books';
         let response = await got(url, options);
         let body = JSON.parse(response.body);
-        let next = body.next;
         let books = body.results;
 
+        let next = body.next;
         while (next !== null) {
             response = await got(next, options);
             body = JSON.parse(response.body);
@@ -119,7 +118,6 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         let items = [];
         items = books.map(b => ({
             id:uuid((b.id).toString()),
-            //rw_id:b.id,
             name:b.title,
             author:b.author,
             category:b.category,
@@ -129,7 +127,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             source_url:b.source_url,
             asin:b.asin,
             document_note:b.document_note,
-            tags:b.tags.map(t => t.name)
+            tags:(b.tags).map((t) => t.name)
         }));
         
         return res.json({items});
