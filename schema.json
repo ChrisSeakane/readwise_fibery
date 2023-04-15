@@ -45,7 +45,7 @@
             "subType": "multi-select"            
         },
         "book": {
-            "name": "Books",
+            "name": "Book ",
             "type": "text",
             "relation": {
                 "cardinality": "many-to-one",
