@@ -49,20 +49,9 @@ app.post(`/api/v1/synchronizer/config`, (req, res) => res.json(syncConfig));
 const schema = require(`./schema.json`);
 app.post(`/api/v1/synchronizer/schema`, (req, res) => res.json(schema));
 
-/*
-app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
-    let tzs = spacetime().timezones;
-    let tzname = Object.keys(tzs);
-    tzname = tzname.map(getTitle);
-    const items = tzname.sort((a, b) => (a.title > b.title) ? 1: -1);
-    res.json({items});
-}));
-*/
-
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
-    
     const options = { headers: { 'Authorization': 'Token ' + account.token } };
         
     if (requestedType !== `highlight` && requestedType != `book`) {
@@ -84,7 +73,6 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         }
         
         let items = highlights.map((h) => ({...h, id: uuid((h.id).toString()), name: h.text, book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
-        
         return res.json({items});
     }
     
@@ -103,9 +91,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         } 
         
         let items = books.map((b) => ({...b, id: uuid((b.id).toString()), name: b.title, tags: (b.tags).map((t) => t.name)}));
-        
         return res.json({items});
-        
     }
 }));
 
