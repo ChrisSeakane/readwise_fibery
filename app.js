@@ -102,7 +102,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         }));
         */
         
-        let items = highlights.map(h => ({...h, id: uuid((h.id).toString()), book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
+        let items = highlights.map((h) => ({...h, id: uuid((h.id).toString()), book: uuid((h.book_id).toString()), tags: (h.tags).map((t) => t.name)}));
         
         return res.json({items});
     }
@@ -138,7 +138,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         }));
         */
         
-        items = books.map(h => ({...b, id: uuid((b.id).toString()), tags: (b.tags).map((t) => t.name)}));
+        items = books.map((b) => ({...b, id: uuid((b.id).toString()), tags: (b.tags).map((t) => t.name)}));
         
         return res.json({items});
         
