@@ -99,7 +99,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     const item = s.json();
                     console.log(item);
                     item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = req.body.fields.token;
+                    item.name = req.body.fields.accesstoken;
                     item.timezone = s.timezone().name;
                     //item.timezone = timezone;
                     item.id = uuid(JSON.stringify(item));
