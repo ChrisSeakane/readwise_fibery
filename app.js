@@ -96,8 +96,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             url:h.url,
             note:h.note,
             location_type:h.location_type,
-            book:uuid((h.book_id).toString())
-            //tags:h.tags.map(t => t.name)
+            book:uuid((h.book_id).toString()),
+            tags:h.tags.map(t => t.name)
         }));
         
         return res.json({items});
@@ -129,21 +129,11 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             source_url:b.source_url,
             asin:b.asin,
             document_note:b.document_note,
-            //tags:b.tags.map(t => t.name)
+            tags:b.tags.map(t => t.name)
         }));
         
         return res.json({items});
         
-        /*
-        const items = [];
-        const item = {
-            name: "Book 1",
-            rw_id: 26439564
-        };
-        item.id = uuid((item.rw_id).toString());
-        items.push(item);
-        return res.json({items});
-        */
     }
 }));
 
