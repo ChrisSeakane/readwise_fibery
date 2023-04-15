@@ -38,7 +38,14 @@ app.get(`/`, (req, res) => res.json(appConfig));
 app.post(`/validate`, (req, res) => {
     const token = req.body.fields.token;
     if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
+        if (req.body.fields.connectionname) {
+            return res.json({
+                name: `${req.body.fields.connectionname}`,
+                accesstoken: token,
+            });                    
+        }
         return res.json({
+            name: `Readwise`,
             accesstoken: token,
         });
     }
