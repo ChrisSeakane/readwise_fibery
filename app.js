@@ -23,7 +23,7 @@ app.post(`/validate`, wrap(async (req, res) => {
         const options = { headers: { 'Authorization': 'Token ' + req.body.fields.token } };
         let response = await got('https://readwise.io/api/v2/auth/', options);    
 
-        if (req.body.fields.token; == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
+        if (req.body.fields.token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
             if (req.body.fields.connectionname) {
                 return res.json({
                     name: `${req.body.fields.connectionname}`
