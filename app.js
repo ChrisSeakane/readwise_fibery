@@ -17,15 +17,15 @@ app.get(`/logo`, (req, res) => res.sendFile(path.resolve(__dirname, `logo.svg`))
 const appConfig = require(`./config.app.json`);
 app.get(`/`, (req, res) => res.json(appConfig));
 
-app.post(`/validate`, wrap(async (req, res) => {
+app.post(`/validate`, wrap(async (req, res) => {  
     
     if (req.body.fields.token != null) {
-        const options = { headers: { 'Authorization': 'Token ' + req.body.fields.token } };
-        //let response = 123;
-        let response = await got('https://readwise.io/api/v2/auth/', options);
+        
 
-        //if (response == 123){
-        if (response.status == 204) {
+        const options = { headers: { 'Authorization': 'Token ' + req.body.fields.token } };
+        response = await got('https://readwise.io/api/v2/auth/', options);    
+
+        if (req.body.fields.token; == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
             if (req.body.fields.connectionname) {
                 return res.json({
                     name: `${req.body.fields.connectionname}`
@@ -38,6 +38,7 @@ app.post(`/validate`, wrap(async (req, res) => {
     }
 
     res.status(401).json({message: `Invalid access token`});
+    
 }));
 
 const syncConfig = require(`./config.sync.json`);
