@@ -20,9 +20,9 @@ app.get(`/`, (req, res) => res.json(appConfig));
 app.post(`/validate`, wrap(async (req, res) => {
     
     if (req.body.fields.token != null) {
-        const token = req.body.fields.token;
+        //const token = req.body.fields.token;
 
-        const options = { headers: { 'Authorization': 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
+        const options = { headers: { 'Authorization': 'Token ' + req.body.fields.token } };
         let response = await got('https://readwise.io/api/v2/auth/', options);
         console.log(response);
         //const resp = JSON.parse(response.body);
