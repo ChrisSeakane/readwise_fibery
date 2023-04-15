@@ -69,7 +69,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
     
-    const options = { headers: { 'Authorization': 'Token ' + account.token } , data: {'page_size': 1 } };
+    const options = { headers: { 'Authorization': 'Token ' + account.token } };
     
     var url = 'https://readwise.io/api/v2/highlights?page_size=1';
     let response = await got(url, options);
@@ -77,14 +77,12 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     let next = body.next;
     let highlights = body.results;
     
-    /*
     while (next !== null) {
         response = await got(next, options);
         body = JSON.parse(response.body);
         next = body.next;
         highlights = highlights.concat(body.results);
     } 
-    */
     
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
