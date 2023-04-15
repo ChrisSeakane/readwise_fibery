@@ -7,7 +7,7 @@
         "rw_id": {
             "name": "Readwise Id",
             "type": "number",
-            "subtype": "integer"
+            "subType": "integer"
         },
         "name": {
             "name": "Name",
@@ -79,7 +79,7 @@
         "rw_id": {
             "name": "Readwise Id",
             "type": "number",
-            "subtype": "integer"
+            "subType": "integer"
         }
     },
     "book": {
@@ -94,7 +94,7 @@
         "rw_id": {
             "name": "Readwise Id",
             "type": "number",
-            "subtype": "integer"
+            "subType": "integer"
         }
     }
 }
