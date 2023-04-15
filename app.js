@@ -52,11 +52,6 @@ app.post(`/api/v1/synchronizer/config`, (req, res) => res.json(syncConfig));
 const schema = require(`./schema.json`);
 app.post(`/api/v1/synchronizer/schema`, (req, res) => res.json(schema));
 
-function getTitle(name) {
-  let s = spacetime('2000',name);
-  return {title:s.timezone().name, value:name};
-}
-
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     let tzs = spacetime().timezones;
     let tzname = Object.keys(tzs);
@@ -71,7 +66,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
     const options = { headers: { 'Authorization': 'Token ' + account.token } };
     
-    var url = 'https://readwise.io/api/v2/highlights?page_size=1';
+    var url = 'https://readwise.io/api/v2/highlights';
     let response = await got(url, options);
     let body = JSON.parse(response.body);
     let next = body.next;
@@ -87,11 +82,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType !== `highlight` && requestedType != `book` && requestedType != `htag`) {
         throw new Error(`Only these database can be synchronized`);
     }
-    
-    const {timezone} = filter;
-    const yearRange = [2023,2023];
-
-    
+        
     if (requestedType == `highlight`){
         let items = [];
         items = highlights.map(h => ({
