@@ -12,6 +12,12 @@ app.use(logger(`dev`));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+app.use(function (req, res, next) {
+    console.log("Res: ", res);
+    next();
+});
+
+
 app.get(`/logo`, (req, res) => res.sendFile(path.resolve(__dirname, `logo.svg`)));
 
 const appConfig = require(`./config.app.json`);
@@ -36,7 +42,7 @@ app.post(`/validate`, wrap(async (req, res) => {
         }
     }
 
-    res.status(401).json({message: `Invalid access token`});
+    //res.status(401).json({message: `Invalid access token`});
     
 }));
 
@@ -62,12 +68,12 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
-    const req_opts = {headers:{}};
-    //if (account.auth == "token") {
-        //req_opts.headers['Authorization'] = 'Token ' + account.token;
-    //}
     
-    //const {requestedType, filter} = req.body;
+    const options = { headers: { 'Authorization': 'Token ' + account.token } };
+    let response = await got('https://readwise.io/api/v2/highlights/', options);
+    let jsonhighlights = await response.json();    
+    
+    
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
     }
@@ -93,7 +99,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     const item = s.json();
                     console.log(item);
                     item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = account.token;
+                    item.name = jsonhighlights.next;
                     item.timezone = s.timezone().name;
                     //item.timezone = timezone;
                     item.id = uuid(JSON.stringify(item));
