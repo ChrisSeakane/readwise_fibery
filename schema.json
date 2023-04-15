@@ -45,10 +45,10 @@
                 "targetFieldId": "id"
             }
         },
-        location_type: {
-            name: `Location type`,
-            type: `text`,
-            subType: `single-select`
+        "location_type": {
+            "name": "Location type",
+            "type": "text",
+            "subType": "single-select"
         },
         "tag": {
             "name": "TagLink",
