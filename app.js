@@ -77,12 +77,14 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     let next = body.next;
     let highlights = body.results;
     
+    /*
     while (next !== null) {
         response = await got(next, options);
         body = JSON.parse(response.body);
         next = body.next;
         highlights = highlights.concat(body.results);
-    }    
+    } 
+    */
     
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
@@ -109,7 +111,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     const item = s.json();
                     console.log(item);
                     item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = highlights.results[d-1].text;
+                    item.name = highlights.next;
                     item.timezone = s.timezone().name;
                     //item.timezone = timezone;
                     item.id = uuid(JSON.stringify(item));
