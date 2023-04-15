@@ -1,14 +1,28 @@
 {
-  "id": "dates-app",
-  "name": "Dates",
+  "id": "readwise-app",
+  "name": "Readwise",
   "version": "1.0.0",
-  "description": "Augment date information in Fibery",
+  "description": "Sync Readwise to Fibery",
   "authentication": [
     {
-      "id": "public",
-      "name": "Public Access",
-      "description": "There is no any authentication required",
-      "fields": []
+      "description": "Provide Token",
+      "name": "Token Authentication",
+      "id": "token",
+      "fields": [
+          {   
+            "id":"connectionname", 
+            "title":"Name",
+            "description": "Human-readable name for this configuration",
+            "type":"text",
+            "optional":true
+          },
+          {
+            "id": "token",
+            "title": "Personal Token",
+            "description": "Readwise access token (find yours at https://readwise.io/access_token)",
+            "type": "text"
+          }
+      ]
     }
   ],
   "sources": [],
