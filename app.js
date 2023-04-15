@@ -105,7 +105,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             url:h.url,
             note:h.note,
             location_type:h.location_type,
-            book:h.book_id
+            book:h.book_id,
+            tags:h.tags.map((t)=> t.id)
         }));
         
         
@@ -149,9 +150,15 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     }
     else if (requestedType == `htag`){
         const items = [];
-        const item = {
+        let item = {
             name: "Tag 1",
             rw_id: 120783779
+        };
+        item.id = uuid((item.rw_id).toString());
+        items.push(item);
+        item = {
+            name: "Tag 2",
+            rw_id: 120799464
         };
         item.id = uuid((item.rw_id).toString());
         items.push(item);
