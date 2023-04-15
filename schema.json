@@ -58,7 +58,7 @@
                 },
                 {
                     name: `time_offset`,
-                },
+                }
             ]
         },
         "tag": {
