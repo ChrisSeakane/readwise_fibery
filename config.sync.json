@@ -1,12 +1,12 @@
 {
   "types": [
     {
-      "id": "date",
-      "name": "Date"
+      "id": "highlight",
+      "name": "Highlight"
     },
     {
-      "id": "week",
-      "name":"Week"
+      "id": "book",
+      "name":"Book"
     }    
   ],
   "filters": [
