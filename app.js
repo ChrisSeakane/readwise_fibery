@@ -79,7 +79,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         highlights = highlights.concat(body.results);
     } 
     
-    if (requestedType !== `highlight` && requestedType != `book` && requestedType != `htag`) {
+    if (requestedType !== `highlight` && requestedType != `book`) {
         throw new Error(`Only these database can be synchronized`);
     }
         
@@ -97,25 +97,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             note:h.note,
             location_type:h.location_type,
             book:h.uuid(book_id.toString()),
-            tags:h.tags.map((t)=> uuid((t.id).toString()))
+            tags:h.tags.map((t)=> (t.name)
         }));
         
-        return res.json({items});
-    }
-    else if (requestedType == `htag`){
-        const items = [];
-        let item = {
-            name: "Tag 1",
-            rw_id: 120783779
-        };
-        item.id = uuid((item.rw_id).toString());
-        items.push(item);
-        item = {
-            name: "Tag 2",
-            rw_id: 120799464
-        };
-        item.id = uuid((item.rw_id).toString());
-        items.push(item);
         return res.json({items});
     }
     else if (requestedType == `book`){
