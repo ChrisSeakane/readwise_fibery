@@ -65,25 +65,25 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
     
     const options = { headers: { 'Authorization': 'Token ' + account.token } };
-    
-    var url = 'https://readwise.io/api/v2/highlights';
-    let response = await got(url, options);
-    let body = JSON.parse(response.body);
-    let next = body.next;
-    let highlights = body.results;
-    
-    while (next !== null) {
-        response = await got(next, options);
-        body = JSON.parse(response.body);
-        next = body.next;
-        highlights = highlights.concat(body.results);
-    } 
-    
+        
     if (requestedType !== `highlight` && requestedType != `book`) {
         throw new Error(`Only these database can be synchronized`);
     }
         
     if (requestedType == `highlight`){
+        var url = 'https://readwise.io/api/v2/highlights';
+        let response = await got(url, options);
+        let body = JSON.parse(response.body);
+        let next = body.next;
+        let highlights = body.results;
+
+        while (next !== null) {
+            response = await got(next, options);
+            body = JSON.parse(response.body);
+            next = body.next;
+            highlights = highlights.concat(body.results);
+        } 
+        
         let items = [];
         items = highlights.map(h => ({
             id:uuid((h.id).toString()),
@@ -103,6 +103,38 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         return res.json({items});
     }
     else if (requestedType == `book`){
+        var url = 'https://readwise.io/api/v2/books';
+        let response = await got(url, options);
+        let body = JSON.parse(response.body);
+        let next = body.next;
+        let books = body.results;
+
+        while (next !== null) {
+            response = await got(next, options);
+            body = JSON.parse(response.body);
+            next = body.next;
+            highlights = highlights.concat(body.results);
+        } 
+        
+        let items = [];
+        items = books.map(b => ({
+            id:uuid((b.id).toString()),
+            //rw_id:b.id,
+            title:b.text,
+            author:b.author,
+            category:b.category,
+            source:b.source,
+            updated:b.updated,
+            cover_image_url:b.cover_image_url,
+            source_url:b.source_url,
+            asin:b.asin,
+            document_note:b.document_note,
+            //tags:b.tags.map(t => t.name)
+        }));
+        
+        return res.json({items});
+        
+        /*
         const items = [];
         const item = {
             name: "Book 1",
@@ -111,6 +143,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         item.id = uuid((item.rw_id).toString());
         items.push(item);
         return res.json({items});
+        */
     }
 }));
 
