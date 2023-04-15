@@ -7,11 +7,7 @@
     {
       "id": "book",
       "name":"Book"
-    },
-    {
-      "id": "htag",
-      "name":"Highlight Tag"
-    }    
+    }  
   ],
   "filters": [
     {
