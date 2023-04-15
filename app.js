@@ -84,23 +84,23 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         highlights = highlights.concat(body.results);
     } 
     
-    if (requestedType !== `date` && requestedType != `week`) {
+    if (requestedType !== `highlight` && requestedType != `book` && requestedType != `htag`) {
         throw new Error(`Only these database can be synchronized`);
     }
-    /*
-    if (_.isEmpty(filter.countries)) {
-        throw new Error(`Countries filter should be specified`);
-    }
-    */
+    
     const {timezone} = filter;
     const yearRange = [2023,2023];
-    //var linkID;
+
     
-    if (requestedType == `date`){
+    if (requestedType == `highlight`){
         const items = [];
+        items = highlights.map((h) => {'id':h.id, 'name':h.text});
+        
+        
+        /*
         let s = spacetime('2000',timezone);
-        //s = s.timezone(timezone);
-        //for (const country of countries) {
+
+
             for (const year of yearRange) {
                 s = s.year(year)
                 console.log(s.leapYear()?366:365)
@@ -122,14 +122,22 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     items.push(item);
                 }
             }
-        //}
+        */
         return res.json({items});
     }
-    else if (requestedType == `week`){
+    else if (requestedType == `book`){
         const items = [];
         const item = {
-            number: 1,
-            name: "Week 1"
+            name: "Book 1"
+        };
+        item.id = uuid(JSON.stringify(item));
+        items.push(item);
+        return res.json({items});
+    }
+    else if (requestedType == `htag`){
+        const items = [];
+        const item = {
+            name: "Tag 1"
         };
         item.id = uuid(JSON.stringify(item));
         items.push(item);
