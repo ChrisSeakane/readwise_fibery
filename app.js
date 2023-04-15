@@ -96,7 +96,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             url:h.url,
             note:h.note,
             location_type:h.location_type,
-            book:h.uuid((h.book_id).toString())
+            book:uuid((h.book_id).toString())
             //tags:h.tags.map(t => t.name)
         }));
         
