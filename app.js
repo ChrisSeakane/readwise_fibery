@@ -95,7 +95,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType == `highlight`){
         let items = [];
         items = highlights.map(h => ({
-            id:uuid(h.id),
+            id:uuid((h.id).toString()),
             rw_id:h.id,
             name:h.text,
             color:h.color,
