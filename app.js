@@ -38,8 +38,8 @@ app.get(`/`, (req, res) => res.json(appConfig));
 app.post(`/validate`, (req, res) => {
     const token = req.body.fields.token;
     
-    const options = { headers: { "Authorization": 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
-    const response = await got("https://readwise.io/api/v2/auth/", options);    
+    const options = { headers: { 'Authorization': 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
+    const response = await got('https://readwise.io/api/v2/auth/', options);    
     
     if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
         if (req.body.fields.connectionname) {
@@ -76,13 +76,13 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
 
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
-    let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
+    //let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
     const req_opts = {headers:{}};
     //if (account.auth == "token") {
-        //req_opts.headers["Zotero-API-Key"] = account.token;
+        //req_opts.headers['Authorization'] = 'Token ' + account.token;
     //}
     
-    //const {requestedType, filter} = req.body;
+    const {requestedType, filter} = req.body;
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
     }
