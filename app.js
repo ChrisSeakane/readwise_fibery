@@ -61,13 +61,13 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
 
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
-    //let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
+    let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
     const req_opts = {headers:{}};
     //if (account.auth == "token") {
         //req_opts.headers['Authorization'] = 'Token ' + account.token;
     //}
     
-    const {requestedType, filter} = req.body;
+    //const {requestedType, filter} = req.body;
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
     }
