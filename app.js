@@ -96,9 +96,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         let items = [];
         items = highlights.map(h => ({
             id:uuid((h.id).toString()),
-            rw_id:h.id,
+            //rw_id:h.id,
             name:h.text,
-            color:h.color,
+            color:h.tags.map((t)=> t.id),
             location:h.location,
             highlighted_at:h.highlighted_at,
             updated:h.updated,
