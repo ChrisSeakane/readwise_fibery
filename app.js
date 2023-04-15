@@ -77,12 +77,14 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     let next = body.next;
     let highlights = body.results;
     
+    /*
     while (next !== null) {
         response = await got(next, options);
         body = JSON.parse(response.body);
         next = body.next;
         highlights = highlights.concat(body.results);
     } 
+    */
     
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
