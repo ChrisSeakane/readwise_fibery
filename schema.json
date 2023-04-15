@@ -30,7 +30,7 @@
             "type": "text",
             "subtype": "url"
         },
-        "colour": {
+        "color": {
             "name": "Color",
             "type": "text"
         },
@@ -59,7 +59,7 @@
                 {
                     name: `time_offset`,
                 },
-            ],
+            ]
         },
         "tag": {
             "name": "TagLink",
