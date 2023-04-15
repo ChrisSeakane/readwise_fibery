@@ -93,7 +93,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
     
     if (requestedType == `highlight`){
-        const items = [];
+        let items = [];
         items = highlights.map(h => ({id:h.id, name:h.text}));
         
         
