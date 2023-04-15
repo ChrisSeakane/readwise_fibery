@@ -39,6 +39,11 @@
             "type": "text",
             "subType": "single-select"
         },
+        "tags": {
+            "name": "Tags",
+            "type": "array[text]",
+            "subType": "multi-select"            
+        },
         "book": {
             "name": "BookLink",
             "type": "text",
@@ -49,27 +54,6 @@
                 "targetType": "book",
                 "targetFieldId": "id"
             }
-        },
-        "tag": {
-            "name": "TagLink",
-            "type": "array[text]",
-            "relation": {
-                "cardinality": "many-to-many",
-                "name": "Tags",
-                "targetName": "Highlights",
-                "targetType": "htag",
-                "targetFieldId": "id"
-            }
-        }   
-    },
-    "htag": {
-        "id": {
-            "name": "Id",
-            "type": "id"
-        },
-        "name": {
-            "name": "Name",
-            "type": "text"
         }
     },
     "book": {
