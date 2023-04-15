@@ -95,7 +95,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType == `highlight`){
         let items = [];
         items = highlights.map(h => ({
-            id:h.id,
+            id:uuid(h.id),
+            rw_id:h.id,
             name:h.text,
             color:h.color,
             location:h.location,
@@ -139,7 +140,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     else if (requestedType == `book`){
         const items = [];
         const item = {
-            name: "Book 1"
+            name: "Book 1",
+            rw_id: 26439564
         };
         item.id = uuid(JSON.stringify(item));
         items.push(item);
