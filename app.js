@@ -28,7 +28,7 @@ app.post(`/validate`, wrap(async (req, res) => {
         //const resp = JSON.parse(response.body);
         //console.log(resp);
 
-        if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
+        if (response.status = 204) { //replace with real check
             if (req.body.fields.connectionname) {
                 return res.json({
                     name: `${req.body.fields.connectionname}`
