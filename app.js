@@ -97,7 +97,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             note:h.note,
             location_type:h.location_type,
             book:h.uuid(book_id.toString()),
-            tags:h.tags.map((t)=> (t.name)
+            tags:h.tags.map(t => t.name)
         }));
         
         return res.json({items});
