@@ -20,13 +20,8 @@ app.get(`/`, (req, res) => res.json(appConfig));
 app.post(`/validate`, wrap(async (req, res) => {
     
     if (req.body.fields.token != null) {
-        //const token = req.body.fields.token;
-
         const options = { headers: { 'Authorization': 'Token ' + req.body.fields.token } };
         let response = await got('https://readwise.io/api/v2/auth/', options);
-        console.log(response);
-        //const resp = JSON.parse(response.body);
-        //console.log(resp);
 
         if (response.status = 204) { //replace with real check
             if (req.body.fields.connectionname) {
@@ -38,9 +33,10 @@ app.post(`/validate`, wrap(async (req, res) => {
                 name: 'Readwise'
             });
         }
+        res.status(401).json({message: `Invalid access token`});
     }
 
-    res.status(401).json({message: `Invalid access token`});
+    res.status(401).json({message: `No token provided`});
 }));
 
 const syncConfig = require(`./config.sync.json`);
