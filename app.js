@@ -103,7 +103,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             updated:h.updated,
             url:h.url,
             note:h.note,
-            location_type:h.location_type
+            location_type:h.location_type,
+            book:h.book_id
         }));
         
         
