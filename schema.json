@@ -1,0 +1,178 @@
+{
+    "literature": {
+      "id": {
+        "name": "Id",
+        "type": "id"
+      },
+      "name": {
+        "name": "Name",
+        "type": "text"
+      },
+      "date": {
+        "name": "Publication Date",
+        "type": "text"
+      },
+      "link": {
+        "name": "Zotero Link",
+        "type": "text",
+        "subType": "url"
+      },
+      "key": {
+        "name": "Zotero Key",
+        "type": "text"
+      },
+      "version": {
+        "name": "Zotero Version",
+        "type": "text"
+      },
+      "bibtex": {
+        "name": "bibtex",
+        "type": "text"
+      },
+      "abstractNote": {
+        "name": "Abstract",
+        "type": "text",
+        "subType":"md"
+
+      },      
+      "authorId": {
+        "type": "array[text]",
+        "name": "Author Id",
+        "relation": {
+          "cardinality": "many-to-many",
+          "targetName": "Works",
+          "name": "Authors",
+          "targetType": "author",
+          "targetFieldId": "id"
+        }
+      },      
+      "tagId": {
+        "type": "array[text]",
+        "name": "Tag Id",
+        "relation": {
+          "cardinality": "many-to-many",
+          "targetName": "Works",
+          "name": "Tags",
+          "targetType": "tag",
+          "targetFieldId": "id"
+        }
+      },
+      "venueId": {
+        "type": "text",
+        "name": "Venue Id",
+        "relation": {
+          "cardinality": "many-to-one",
+          "targetName": "Works",
+          "name": "Venue",
+          "targetType": "venue",
+          "targetFieldId": "id"
+        }
+      } 
+    },
+    "author" : {
+      "id": {
+        "name": "Id",
+        "type": "id"
+      },
+      "name": {
+        "name": "Name",
+        "type": "text"
+      },
+      "firstName": {
+        "name": "First Name",
+        "type": "text"
+      },
+      "middleName": {
+        "name": "Middle Name",
+        "type": "text"
+      },
+      "lastName": {
+        "name": "Last Name",
+        "type": "text"
+      }
+    },
+    "venue" : {
+      "id": {
+        "name": "Id",
+        "type": "id"
+      },
+      "name": {
+        "name": "Name",
+        "type": "text"
+      },
+      "type": {
+        "name": "Venue Type",
+        "type": "text"
+      }     
+    },
+    "tag" : {
+      "id": {
+        "name": "Id",
+        "type": "id"
+      },
+      "name": {
+        "name": "Name",
+        "type": "text"
+      }, 
+      "type": {
+        "name": "Type",
+        "type": "text"
+      },
+      "link": {
+        "name": "Zotero Link",
+        "type": "text",
+        "subType": "url"
+      }
+    },
+    "note" : {
+      "id": {
+        "name": "Id",
+        "type": "id"
+      },
+      "name": {
+        "name": "Name",
+        "type": "text"
+      }, 
+      "creator": {
+        "name": "Created By",
+        "type": "text"
+      },
+      "link": {
+        "name": "Zotero Link",
+        "type": "text",
+        "subType": "url"
+      },
+      "version": {
+        "name": "Zotero Version",
+        "type": "text"
+      },
+      "parentItem": {
+        "name": "Parent Zotero Key",
+        "type": "text"
+      },
+      "note": {
+        "name": "Note",
+        "type": "text",
+        "subType": "md"
+      },
+      "dateAdded": {
+        "name": "Date Added",
+        "type": "date"
+      },
+      "dateModified": {
+        "name": "Date Modified",
+        "type": "date"
+      },      
+      "literatureId": {
+        "type": "text",
+        "name": "Literature Id",
+        "relation": {
+          "cardinality": "many-to-one",
+          "targetName": "Notes",
+          "name": "Literature",
+          "targetType": "literature",
+          "targetFieldId": "id"
+        }
+      }
+    }    
+}

@@ -1,0 +1,25 @@
+{
+  "types": [
+    {
+      "id": "literature",
+      "name": "Literature"
+    },
+    {
+      "id": "author",
+      "name": "Author"
+    },
+    {
+      "id": "venue",
+      "name": "Venue"
+    },
+    {
+      "id": "tag",
+      "name": "Tag"
+    },
+    {
+      "id": "note",
+      "name": "Note"
+    }
+  ],
+  "filters" : []
+}

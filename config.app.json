@@ -1,0 +1,102 @@
+{
+  "id": "zotero-fibery-app",
+  "name": "Zotero",
+  "version": "0.1",
+  "description": "Integrate Zotero library into Fibery",
+  "authentication": [
+    {
+      "id": "public",
+      "name": "Public Access",
+      "description": "There is no any authentication required",
+      "fields": [
+        {   
+          "id":"connectionname", 
+          "title":"Name",
+          "description": "Human-readable name for this configuration (e.g. which library is this)",
+          "type":"text",
+          "optional":true
+        },
+        {   
+          "id":"libraryid", 
+          "title":"Library ID",
+          "description": "ID of the zotero library you'd like to sync; use your userID to sync your personal library",
+          "type":"text"
+        },
+        {   
+          "id":"librarytype", 
+          "title":"Group Library?",
+          "description": "Check this box if the library you'd like to sync is a group library",
+          "type":"bool",
+          "optional":true
+        }
+      ]
+    },
+    {
+      "description": "Provide Token",
+      "name": "Token Authentication",
+      "id": "token",
+      "fields": [
+          {   
+            "id":"connectionname", 
+            "title":"Name",
+            "description": "Human-readable name for this configuration (e.g. which library is this)",
+            "type":"text",
+            "optional":true
+          },
+          {   
+            "id":"libraryid", 
+            "title":"Library ID",
+            "description": "ID of the zotero library you'd like to sync; use your userID to sync your personal library",
+            "type":"text"
+          },
+          {   
+            "id":"librarytype", 
+            "title":"Group Library?",
+            "description": "Check this box if the library you'd like to sync is a group library",
+            "type":"bool",
+            "optional":true
+          },
+          {
+            "type": "text",
+            "title": "Personal Token",
+            "description": "Zotero private key (create one at https://www.zotero.org/settings/keys/new)",
+            "id": "token"
+          }
+      ]
+    }
+  ],
+  "sources": [],
+  "responsibleFor": {
+    "dataSynchronization": true,
+    "automations": true
+  },
+  "actions": [
+    {
+      "action": "add-new-paper",
+      "name": "Add new paper to Zotero library by DOI",
+      "args": [
+        {"id":"doi", "name":"DOI", "type":"text"}
+      ]
+    },    
+    {
+      "action": "add-new-note",
+      "name": "Add new note to Zotero library",
+      "args": [
+        {
+          "id":"note", 
+          "name":"Note Text", 
+          "type":"text",
+          "subType":"md",
+          "description":"The contents of the note you would like to add",
+          "textTemplateSupported":true
+        },
+        {
+          "id":"parent", 
+          "name":"Literature Item ID", 
+          "type":"text",
+          "description":"Zotero key of the literature item this is a note for"
+        }              
+      ]
+    }
+  ]
+}
