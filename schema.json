@@ -15,7 +15,7 @@
         "location": {
             "name": "Location",
             "type": "number",
-            "subtype": "integer"
+            "subType": "integer"
         },
         "highlighted_at": {
             "name": "Highlighted at",
@@ -28,7 +28,7 @@
         "url": {
             "name": "URL",
             "type": "text",
-            "subtype": "url"
+            "subType": "url"
         },
         "color": {
             "name": "Color",
