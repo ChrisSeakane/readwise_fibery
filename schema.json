@@ -51,13 +51,13 @@
             subType: `single-select`,
             options: [
                 {
-                    name: `page`,
+                    name: `page`
                 },
                 {
                     name: `order`
                 },
                 {
-                    name: `time_offset`,
+                    name: `time_offset`
                 }
             ]
         },
