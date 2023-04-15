@@ -37,6 +37,10 @@ app.get(`/`, (req, res) => res.json(appConfig));
 
 app.post(`/validate`, (req, res) => {
     const token = req.body.fields.token;
+    
+    const options = { headers: { "Authorization": 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
+    const response = await got("https://readwise.io/api/v2/auth/", options);    
+    
     if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
         if (req.body.fields.connectionname) {
             return res.json({
@@ -44,7 +48,7 @@ app.post(`/validate`, (req, res) => {
             });                    
         }
         return res.json({
-            name: `Readwise`
+            name: 'Readwise'
         });
     }
 
