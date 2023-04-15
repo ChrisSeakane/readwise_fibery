@@ -105,47 +105,10 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             url:h.url,
             note:h.note,
             location_type:h.location_type,
-            book:h.book_id,
-            tags:h.tags.map((t)=> t.id)
+            book:h.book_id.toString(),
+            tags:h.tags.map((t)=> (t.id).toString())
         }));
         
-        
-        /*
-        let s = spacetime('2000',timezone);
-
-
-            for (const year of yearRange) {
-                s = s.year(year)
-                console.log(s.leapYear()?366:365)
-                for (let d = 1; d <= (s.leapYear()?2:2); d++) {
-                    s = s.dayOfYear(d);
-                    const item = s.json();
-                    console.log(item);
-                    item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = highlights[d-1].text;
-                    item.timezone = s.timezone().name;
-                    //item.timezone = timezone;
-                    item.id = uuid(JSON.stringify(item));
-                    const temp = {
-                        number: 1,
-                        name: "Week 1"
-                    };
-                    temp.id = uuid(JSON.stringify(temp));
-                    item.week = 1;
-                    items.push(item);
-                }
-            }
-        */
-        return res.json({items});
-    }
-    else if (requestedType == `book`){
-        const items = [];
-        const item = {
-            name: "Book 1",
-            rw_id: 26439564
-        };
-        item.id = uuid((item.rw_id).toString());
-        items.push(item);
         return res.json({items});
     }
     else if (requestedType == `htag`){
@@ -159,6 +122,16 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         item = {
             name: "Tag 2",
             rw_id: 120799464
+        };
+        item.id = uuid((item.rw_id).toString());
+        items.push(item);
+        return res.json({items});
+    }
+    else if (requestedType == `book`){
+        const items = [];
+        const item = {
+            name: "Book 1",
+            rw_id: 26439564
         };
         item.id = uuid((item.rw_id).toString());
         items.push(item);
