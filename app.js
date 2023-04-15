@@ -7,24 +7,6 @@ const uuid = require(`uuid-by-string`);
 const got = require(`got`);
 const spacetime = require(`spacetime`);
 
-const getYearRange = filter => {
-    let fromYear = parseInt(filter.from);
-    let toYear = parseInt(filter.to);
-
-    if (_.isNaN(fromYear)) {
-        fromYear = new Date().getFullYear();
-    }
-    if (_.isNaN(toYear)) {
-        toYear = new Date().getFullYear();
-    }
-    const yearRange = [];
-    while(fromYear <= toYear) {
-        yearRange.push(fromYear);
-        fromYear++;
-    }
-    return yearRange;
-};
-
 const app = express();
 app.use(logger(`dev`));
 app.use(express.json());
@@ -35,25 +17,28 @@ app.get(`/logo`, (req, res) => res.sendFile(path.resolve(__dirname, `logo.svg`))
 const appConfig = require(`./config.app.json`);
 app.get(`/`, (req, res) => res.json(appConfig));
 
-app.post(`/validate`, (req, res) => {
-    const token = req.body.fields.token;
+app.post(`/validate`, wrap(async (req, res) => {
     
-    const options = { headers: { 'Authorization': 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
-    const response = await got('https://readwise.io/api/v2/auth/', options);    
-    
-    if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
-        if (req.body.fields.connectionname) {
+    if (req.body.fields.token != null) {
+        const token = req.body.fields.token;
+
+        const options = { headers: { 'Authorization': 'Token OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ' } };
+        response = await got('https://readwise.io/api/v2/auth/', options);    
+
+        if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
+            if (req.body.fields.connectionname) {
+                return res.json({
+                    name: `${req.body.fields.connectionname}`
+                });                    
+            }
             return res.json({
-                name: `${req.body.fields.connectionname}`
-            });                    
+                name: 'Readwise'
+            });
         }
-        return res.json({
-            name: 'Readwise'
-        });
     }
 
     res.status(401).json({message: `Invalid access token`});
-});
+}));
 
 const syncConfig = require(`./config.sync.json`);
 app.post(`/api/v1/synchronizer/config`, (req, res) => res.json(syncConfig));
@@ -92,7 +77,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     }
     */
     const {timezone} = filter;
-    const yearRange = getYearRange(filter);
+    const yearRange = [2023,2023];
     //var linkID;
     
     if (requestedType == `date`){
