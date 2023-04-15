@@ -150,9 +150,10 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     else if (requestedType == `htag`){
         const items = [];
         const item = {
-            name: "Tag 1"
+            name: "Tag 1",
+            rw_id: 120783779
         };
-        item.id = uuid(JSON.stringify(item));
+        item.id = uuid((item.rw_id).toString());
         items.push(item);
         return res.json({items});
     }
