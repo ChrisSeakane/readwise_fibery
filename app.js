@@ -40,13 +40,11 @@ app.post(`/validate`, (req, res) => {
     if (token == "OieqQiyzerj9lAbxJzrOm7ULAOxMyyN6DHdLlgdzbxnWzvDphZ") { //replace with real check
         if (req.body.fields.connectionname) {
             return res.json({
-                name: `${req.body.fields.connectionname}`,
-                accesstoken: token,
+                name: `${req.body.fields.connectionname}`
             });                    
         }
         return res.json({
-            name: `Readwise`,
-            accesstoken: token,
+            name: `Readwise`
         });
     }
 
@@ -73,7 +71,14 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
 }));
 
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
-    const {requestedType, filter} = req.body;
+    
+    let {requestedType, pagination, account, lastSynchronizedAt, filter} = req.body;
+    const req_opts = {headers:{}};
+    //if (account.auth == "token") {
+        //req_opts.headers["Zotero-API-Key"] = account.token;
+    //}
+    
+    //const {requestedType, filter} = req.body;
     if (requestedType !== `date` && requestedType != `week`) {
         throw new Error(`Only these database can be synchronized`);
     }
@@ -99,7 +104,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
                     const item = s.json();
                     console.log(item);
                     item.date = item.year + "-" + (item.month +1) + "-" + item.date;
-                    item.name = req.body.fields.accesstoken;
+                    item.name = account.token;
                     item.timezone = s.timezone().name;
                     //item.timezone = timezone;
                     item.id = uuid(JSON.stringify(item));
